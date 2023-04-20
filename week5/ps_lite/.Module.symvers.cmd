@@ -1,0 +1,1 @@
+cmd_/home/soyeon/os/week5/ps_lite/Module.symvers := sed 's/ko$$/o/' /home/soyeon/os/week5/ps_lite/modules.order | scripts/mod/modpost -m -a   -o /home/soyeon/os/week5/ps_lite/Module.symvers -e -i Module.symvers   -T -

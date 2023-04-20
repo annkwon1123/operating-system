@@ -1,0 +1,1 @@
+cmd_/home/soyeon/os/week5/1_for_each_process/all_pid_with_macro.ko := ld -r -m elf_x86_64  --build-id=sha1  -T scripts/module.lds -o /home/soyeon/os/week5/1_for_each_process/all_pid_with_macro.ko /home/soyeon/os/week5/1_for_each_process/all_pid_with_macro.o /home/soyeon/os/week5/1_for_each_process/all_pid_with_macro.mod.o;  true

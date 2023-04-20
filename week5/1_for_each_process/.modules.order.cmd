@@ -1,0 +1,1 @@
+cmd_/home/soyeon/os/week5/1_for_each_process/modules.order := {   echo /home/soyeon/os/week5/1_for_each_process/all_pid_with_macro.ko; :; } | awk '!x[$$0]++' - > /home/soyeon/os/week5/1_for_each_process/modules.order

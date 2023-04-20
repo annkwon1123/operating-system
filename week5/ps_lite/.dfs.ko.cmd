@@ -1,0 +1,1 @@
+cmd_/home/soyeon/os/week5/ps_lite/dfs.ko := ld -r -m elf_x86_64  --build-id=sha1  -T scripts/module.lds -o /home/soyeon/os/week5/ps_lite/dfs.ko /home/soyeon/os/week5/ps_lite/dfs.o /home/soyeon/os/week5/ps_lite/dfs.mod.o;  true

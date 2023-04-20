@@ -1,0 +1,1 @@
+cmd_/home/soyeon/os/week5/1_for_each_process/Module.symvers := sed 's/ko$$/o/' /home/soyeon/os/week5/1_for_each_process/modules.order | scripts/mod/modpost -m -a   -o /home/soyeon/os/week5/1_for_each_process/Module.symvers -e -i Module.symvers   -T -

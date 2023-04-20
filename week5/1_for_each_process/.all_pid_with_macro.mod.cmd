@@ -1,0 +1,1 @@
+cmd_/home/soyeon/os/week5/1_for_each_process/all_pid_with_macro.mod := { echo  /home/soyeon/os/week5/1_for_each_process/all_pid_with_macro.o;  echo; } > /home/soyeon/os/week5/1_for_each_process/all_pid_with_macro.mod
