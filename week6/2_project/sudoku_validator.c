@@ -40,6 +40,7 @@ void *isColumnValid(void* param) {
 	if (row != 0 || col > 8) {
 		fprintf(stderr, "Invalid row or column for col subsection! row=%d, col=%d\n", row, col);
 		/* TODO 1 : exit thread */
+		pthread_exit(0);
 	}
 
 	// validityArray는 1~9의 숫자의 존재 유무를 판단하기 위해 만듦
@@ -51,6 +52,7 @@ void *isColumnValid(void* param) {
 		// 같은 숫자가 이미 존재할 경우
 		if (num < 1 || num > 9 || validityArray[num - 1] == 1) {
 			/* TODO 2 : exit thread */
+			pthread_exit(0);
 		// 처음 나온 숫자일 경우
 		} else {
 			validityArray[num - 1] = 1;		
@@ -60,6 +62,7 @@ void *isColumnValid(void* param) {
 	// If reached this point, col subsection is valid.
 	valid[18 + col] = 1;
 	/* TODO 3 : exit thread */
+	pthread_exit(0);
 }
 
 // Method that determines if numbers 1-9 only appear once in a row
@@ -75,6 +78,7 @@ void *isRowValid(void* param) {
 	if (col != 0 || row > 8) {
 		fprintf(stderr, "Invalid row or column for row subsection! row=%d, col=%d\n", row, col);
 		/* TODO 4 : exit thread */
+		pthread_exit(0);
 	}
 
 	// validityArray는 1~9의 숫자의 존재 유무를 판단하기 위해 만듦
@@ -87,6 +91,7 @@ void *isRowValid(void* param) {
 		int num = sudoku[row][i];
 		if (num < 1 || num > 9 || validityArray[num - 1] == 1) {
 			/* TODO 5 : exit thread */
+			pthread_exit(0);
 		} else {
 			validityArray[num - 1] = 1;		
 		}
@@ -95,6 +100,7 @@ void *isRowValid(void* param) {
 	// If reached this point, row subsection is valid.
 	valid[9 + row] = 1;
 	/* TODO 6 : exit thread */
+	pthread_exit(0);
 }
 
 // Method that determines if numbers 1-9 only appear once in a 3x3 subsection
@@ -112,6 +118,7 @@ void *is3x3Valid(void* param) {
 	if (row > 6 || row % 3 != 0 || col > 6 || col % 3 != 0) {
 		fprintf(stderr, "Invalid row or column for subsection! row=%d, col=%d\n", row, col);
 		/* TODO 7 : exit thread */
+		pthread_exit(0);
 	}
 
 	// validityArray는 1~9의 숫자의 존재 유무를 판단하기 위해 만듦
@@ -123,6 +130,7 @@ void *is3x3Valid(void* param) {
 			int num = sudoku[i][j];
 			if (num < 1 || num > 9 || validityArray[num - 1] == 1) {
 				/* TODO 8 : exit thread */
+				pthread_exit(0);
 			} else {
 				validityArray[num - 1] = 1;		
 			}
@@ -131,6 +139,7 @@ void *is3x3Valid(void* param) {
 	// If reached this point, 3x3 subsection is valid.
 	valid[row + col/3] = 1; // Maps the subsection to an index in the first 8 indices of the valid array
 	/* TODO 9 : exit thread */
+	pthread_exit(0);
 }
 
 int main() {	
@@ -151,6 +160,8 @@ int main() {
 				data->column = j;
 				/* TODO 10 : create thread */
 				// threads 리스트의 threadIndex위치에 쓰레드를 생성
+				// pthread_attr_init(&threads[threadIndex]);
+				pthread_create(&threads[threadIndex], NULL, is3x3Valid, data);
 				printf("%2dth thread created with \'is3x3Valid\' function at \t[%d][%d]\n", threadIndex, i, j);
 			}
 			// THREAD: column check
@@ -160,6 +171,8 @@ int main() {
 				columnData->column = j;
 				/* TODO 11 : create thread */
 				// threads 리스트의 threadIndex위치에 쓰레드를 생성
+				// pthread_attr_init(&threads[threadIndex]);
+				pthread_create(&threads[threadIndex], NULL, isColumnValid, columnData);
 				printf("%2dth thread created with \'isColumnValid\' function at \t[%d][%d]\n", threadIndex, i, j);
 			}
 			// THREAD: row checking
@@ -169,6 +182,8 @@ int main() {
 				rowData->column = j;
 				/* TODO 12 : create thread */
 				// threads 리스트의 threadIndex위치에 쓰레드를 생성
+				// pthread_attr_init(&threads[threadIndex]);
+				pthread_create(&threads[threadIndex], NULL, isRowValid, rowData);
 				printf("%2dth thread created with \'isRowValid\' function at \t[%d][%d]\n", threadIndex, i, j);
 			}				
 		}
@@ -176,6 +191,7 @@ int main() {
 
 	for (i = 0; i < num_threads; i++) {
 		/* TODO 13 : wait for all created threads */
+		pthread_join(threads[threadIndex], NULL);
 		printf("%2dth thread terminated\n", i);
 	}
 
